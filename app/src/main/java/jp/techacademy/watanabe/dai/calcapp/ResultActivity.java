@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -16,8 +18,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Intent intent = getIntent();
-        BigDecimal item1 = new BigDecimal(intent.getIntExtra("item1", 0));
-        BigDecimal item2 = new BigDecimal(intent.getIntExtra("item2", 0));
+        BigDecimal item1 = new BigDecimal(intent.getStringExtra("item1"));
+        BigDecimal item2 = new BigDecimal(intent.getStringExtra("item2"));
         int Arithmetic = intent.getIntExtra("Arithmetic", 0);
 
         Log.d("item1",item1.toString());
@@ -36,11 +38,11 @@ public class ResultActivity extends AppCompatActivity {
                 value = item1.multiply(item2);
                 break;
             case 4:
-                value = item1.divide(item2);
+                value = item1.divide(item2,3, RoundingMode.HALF_UP);
                 break;
         }
 
-        TextView textView = (TextView) findViewById(R.id.TextView);
-        textView.setText(value.toString());
+        TextView textView = findViewById(R.id.TextView);
+        textView.setText(String.format(Locale.US,"%f",value));
     }
 }
