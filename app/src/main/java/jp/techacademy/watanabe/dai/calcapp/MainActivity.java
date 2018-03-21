@@ -20,29 +20,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView mTextView2;
     EditText mEditText2;
 
-    int item1;
-    int item2;
+    String item1;
+    String item2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextView1 = (TextView) findViewById(R.id.TextView1);
-        mEditText1 = (EditText) findViewById(R.id.editText1);
+        mTextView1 = findViewById(R.id.TextView1);
+        mEditText1 = findViewById(R.id.editText1);
 
-        mTextView2 = (TextView) findViewById(R.id.TextView2);
-        mEditText2 = (EditText) findViewById(R.id.editText2);
+        mTextView2 = findViewById(R.id.TextView2);
+        mEditText2 = findViewById(R.id.editText2);
 
-        Button button1 = (Button) findViewById(R.id.button1);
+        Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(this);
 
-        Button button2 = (Button) findViewById(R.id.button2);
+        Button button2 =  findViewById(R.id.button2);
         button2.setOnClickListener(this);
 
-        Button button3 = (Button) findViewById(R.id.button3);
+        Button button3 = findViewById(R.id.button3);
         button3.setOnClickListener(this);
 
-        Button button4 = (Button) findViewById(R.id.button4);
+        Button button4 = findViewById(R.id.button4);
         button4.setOnClickListener(this);
     }
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         try {
-            item1 = Integer.parseInt(mEditText1.getText().toString());
-            item2 = Integer.parseInt(mEditText2.getText().toString());
+            item1 = mEditText1.getText().toString();
+            item2 = mEditText2.getText().toString();
         } catch (NumberFormatException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("数値以外は入力できません")
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Arithmetic = 4;
 
                 //0を割るのを防ぐ
-                if(item1 == 0){
+                if(Double.parseDouble (item1) == 0){
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setMessage("0を割ることはできません")
                             .setTitle("エラー")
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
-        Log.d("send_item1",String.valueOf(item1));
-        Log.d("send_item2",String.valueOf(item2));
+        Log.d("send_item1",item1);
+        Log.d("send_item2",item2);
 
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("item1", item1);
