@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(this);
 
-        Button button2 =  findViewById(R.id.button2);
+        Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(this);
 
         Button button3 = findViewById(R.id.button3);
@@ -49,47 +49,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        try {
-            item1 = mEditText1.getText().toString();
-            item2 = mEditText2.getText().toString();
-        } catch (NumberFormatException e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("数値以外は入力できません")
-                    .setTitle("エラー")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        // ボタンをクリックしたときの動作
-                        }
-                    });
-            builder.show();
-            return;
-        }
+        item1 = mEditText1.getText().toString();
+        item2 = mEditText2.getText().toString();
 
         int Arithmetic = 0;
 
         switch (v.getId()) {
             case R.id.button1:
                 // Button1押下時
-                Log.d("button","+");
+                Log.d("button", "+");
                 Arithmetic = 1;
                 break;
             case R.id.button2:
                 // Button2押下時
-                Log.d("button","-");
+                Log.d("button", "-");
                 Arithmetic = 2;
                 break;
             case R.id.button3:
                 // Button3押下時
-                Log.d("button","*");
+                Log.d("button", "*");
                 Arithmetic = 3;
                 break;
             case R.id.button4:
                 // Button4押下時
-                Log.d("button","/");
+                Log.d("button", "/");
                 Arithmetic = 4;
 
                 //0を割るのを防ぐ
-                if(Double.parseDouble (item1) == 0){
+                if (Double.parseDouble(item2) == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setMessage("0を割ることはできません")
                             .setTitle("エラー")
@@ -105,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
-        Log.d("send_item1",item1);
-        Log.d("send_item2",item2);
+        Log.d("send_item1", item1);
+        Log.d("send_item2", item2);
 
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("item1", item1);
